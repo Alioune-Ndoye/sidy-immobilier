@@ -1,6 +1,11 @@
 import prisma from "@/lib/prisma";
+import { getDemoListing } from "@/constants/DemoListings";
 
 export async function getListing(listingId: string) {
+  if (listingId.startsWith("demo-")) {
+    return getDemoListing(listingId);
+  }
+
   try {
     const listing = await prisma.listing.findUnique({
       where: {

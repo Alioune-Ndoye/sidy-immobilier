@@ -1,4 +1,5 @@
 import axios from "axios";
+import { filterDemoListings } from "@/constants/DemoListings";
 
 export type GetListingsParams = {
   category?: string;
@@ -25,8 +26,11 @@ export async function getListings(params?: GetListingsParams) {
       },
     );
 
-    return data;
+    if (Array.isArray(data) && data.length > 0) return data;
+
+    // Base vide ou indisponible : annonces de démonstration (mode présentation)
+    return filterDemoListings(params);
   } catch {
-    return [];
+    return filterDemoListings(params);
   }
 }
