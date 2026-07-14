@@ -1,5 +1,5 @@
+import Image from "next/image";
 import Link from "next/link";
-import { MdOutlineHomeWork } from "react-icons/md";
 
 export default function Footer() {
   return (
@@ -9,9 +9,14 @@ export default function Footer() {
           {/* marque */}
           <div className="max-w-sm space-y-3">
             <Link href="/" className="flex items-center gap-2">
-              <MdOutlineHomeWork className="text-primary" size={28} />
+              <Image
+                src="/images/nazir-mark.png"
+                alt="Nazir Group"
+                width={36}
+                height={31}
+              />
               <span className="text-lg font-bold text-primary tracking-tight">
-                Sidy&nbsp;Immobilier
+                Nazir&nbsp;Group
               </span>
             </Link>
             <p className="text-sm text-gray-500 leading-relaxed">
@@ -48,7 +53,7 @@ export default function Footer() {
               </ul>
             </div>
             <div className="space-y-3">
-              <p className="font-semibold text-gray-900">Sidy Immobilier</p>
+              <p className="font-semibold text-gray-900">Nazir Group</p>
               <ul className="space-y-2 text-gray-500">
                 <li>
                   <Link href="/" className="hover:text-primary">
@@ -71,7 +76,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 border-t border-gray-200 pt-6 text-center text-xs text-gray-400">
-          © {new Date().getFullYear()} Sidy Immobilier — Tous droits réservés
+          © {new Date().getFullYear()} Nazir Group — Tous droits réservés
         </div>
       </div>
     </footer>

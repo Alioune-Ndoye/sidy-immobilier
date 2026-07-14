@@ -78,7 +78,7 @@ export default function LoginModal() {
       if (error) {
         toast(error.message as string, {
           style: {
-            background: "#0F766E",
+            background: "#044F9C",
             color: "white",
           },
         });
@@ -87,7 +87,7 @@ export default function LoginModal() {
 
       toast("Connexion réussie", {
         style: {
-          background: "#0F766E",
+          background: "#044F9C",
           color: "white",
         },
       });
@@ -101,7 +101,7 @@ export default function LoginModal() {
           : "Une erreur est survenue. Veuillez réessayer.",
         {
           style: {
-            background: "#0F766E",
+            background: "#044F9C",
             color: "white",
           },
         },
@@ -119,7 +119,7 @@ export default function LoginModal() {
     } catch {
       toast("Échec de la connexion Google", {
         style: {
-          background: "#0F766E",
+          background: "#044F9C",
           color: "white",
         },
       });
@@ -129,7 +129,7 @@ export default function LoginModal() {
     <Modal onClose={closeLogin} isOpen={isLoginOpen} title="Connexion">
       <div className="mb-6 space-y-1">
         <h2 className="text-2xl font-semibold text-gray-900">
-          Bienvenue chez Sidy Immobilier
+          Bienvenue chez Nazir Group
         </h2>
         <p className="text-sm text-gray-500">Connectez-vous à votre compte</p>
       </div>

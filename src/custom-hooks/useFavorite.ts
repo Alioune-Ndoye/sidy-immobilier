@@ -21,7 +21,7 @@ export function useFavorite({ currentUser, listingId }: useFavoriteProps) {
     if (!currentUser) {
       toast("Connectez-vous pour ajouter des favoris", {
         style: {
-          background: "#0F766E",
+          background: "#044F9C",
           color: "white",
         },
       });

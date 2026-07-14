@@ -66,7 +66,7 @@ export default function BookingCard({
     if (!session) {
       toast("Connectez-vous pour réserver !", {
         style: {
-          background: "#0F766E",
+          background: "#044F9C",
           color: "white",
         },
       });
@@ -85,7 +85,7 @@ export default function BookingCard({
 
       toast("Réservation confirmée", {
         style: {
-          background: "#0F766E",
+          background: "#044F9C",
           color: "white",
         },
       });
@@ -96,7 +96,7 @@ export default function BookingCard({
       if (axios.isAxiosError(error)) {
         toast(error.response?.data.error, {
           style: {
-            background: "#0F766E",
+            background: "#044F9C",
             color: "white",
           },
         });
@@ -125,7 +125,7 @@ export default function BookingCard({
             direction="horizontal"
             minDate={new Date()}
             showDateDisplay={false}
-            rangeColors={["#0F766E"]}
+            rangeColors={["#044F9C"]}
             disabledDates={disabledDates}
           />
         </div>

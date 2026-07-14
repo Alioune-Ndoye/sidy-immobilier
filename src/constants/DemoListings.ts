@@ -3,7 +3,7 @@
 
 const DEMO_HOST = {
   id: "sidy-demo-host",
-  name: "Sidy Immobilier",
+  name: "Nazir Group",
   image: null as string | null,
 };
 

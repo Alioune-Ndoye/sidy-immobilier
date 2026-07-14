@@ -33,8 +33,8 @@ export default function CountrySelect({ value, onChange }: CountrySelectProps) {
         borderRadius: 12,
         colors: {
           ...theme.colors,
-          primary: "#ccfbf1",
-          primary25: "#ccfbf1",
+          primary: "#dbeafe",
+          primary25: "#dbeafe",
         },
       })}
     />

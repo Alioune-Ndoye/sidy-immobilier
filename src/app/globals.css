@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary:#0F766E
+  --color-primary: #044F9C;
+  --color-accent: #EF9034;
 }
 
 .leaflet-container{

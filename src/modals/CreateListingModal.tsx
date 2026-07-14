@@ -86,7 +86,7 @@ export default function CreateListingModal() {
     ) {
       toast("Tous les champs sont obligatoires !", {
         style: {
-          background: "#0F766E",
+          background: "#044F9C",
           color: "white",
         },
       });
@@ -116,7 +116,7 @@ export default function CreateListingModal() {
 
        toast("Annonce créée avec succès", {
         style: {
-          background: "#0F766E",
+          background: "#044F9C",
           color: "white",
         },
       });  
@@ -128,7 +128,7 @@ export default function CreateListingModal() {
       if(axios.isAxiosError(error)){
          toast(error.response?.data.error || "Une erreur est survenue", {
         style: {
-          background: "#0F766E",
+          background: "#044F9C",
           color: "white",
         },
       });        

@@ -86,7 +86,7 @@ export default function RegisterModal() {
       if(error){
         toast(error.message as string,{
            style:{
-            background:"#0F766E",
+            background:"#044F9C",
             color:"white"
           }
         });
@@ -95,7 +95,7 @@ export default function RegisterModal() {
 
       toast("Inscription réussie",{
            style:{
-            background:"#0F766E",
+            background:"#044F9C",
             color:"white"
           }
         });
@@ -106,7 +106,7 @@ export default function RegisterModal() {
       toast(
         error instanceof Error ? error.message : "Une erreur est survenue. Veuillez réessayer.",{
           style:{
-            background:"#0F766E",
+            background:"#044F9C",
             color:"white"
           }
         }
@@ -124,7 +124,7 @@ export default function RegisterModal() {
       } catch {
          toast("Échec de la connexion Google", {
           style: {
-            background: "#0F766E",
+            background: "#044F9C",
             color: "white",
           },
         });      
@@ -135,7 +135,7 @@ export default function RegisterModal() {
       {/* header */}
       <div className="mb-6 space-y-1">
         <h2 className="text-2xl font-semibold text-gray-900">
-          Bienvenue chez Sidy Immobilier
+          Bienvenue chez Nazir Group
         </h2>
         <p className="text-sm text-gray-500">Créez un compte</p>
       </div>

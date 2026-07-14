@@ -62,7 +62,7 @@ export default function Navbar() {
             Voyageurs
           </span>
 
-          <div className="w-8 h-8 text-white rounded-full bg-primary grid place-items-center">
+          <div className="w-8 h-8 text-white rounded-full bg-accent grid place-items-center">
             <LuSearch size={16} />
           </div>
         </div>

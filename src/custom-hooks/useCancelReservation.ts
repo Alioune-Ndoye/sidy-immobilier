@@ -14,13 +14,13 @@ export function useCancelReservation() {
       await axios.delete(`/api/reservations/${reservationId}`);
 
       toast("Réservation annulée", {
-        style: { color: "white", background: "#0F766E" },
+        style: { color: "white", background: "#044F9C" },
       });
 
       router.refresh();
     } catch (error) {
       toast("Une erreur est survenue", {
-        style: { color: "white", background: "#0F766E" },
+        style: { color: "white", background: "#044F9C" },
       });
       console.log(error);
     } finally {

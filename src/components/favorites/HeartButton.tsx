@@ -32,7 +32,7 @@ export default function HeartButton({
         size={18}
         className={clsx(
           "transition",
-          hasFavorited ? "fill-teal-600 text-teal-600" : "text-gray-700",
+          hasFavorited ? "fill-accent text-accent" : "text-gray-700",
         )}
       />
     </button>

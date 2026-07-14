@@ -16,9 +16,9 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: "Sidy Immobilier",
+  title: "Nazir Group",
   description:
-    "Sidy Immobilier — locations de vacances et résidences partout au Sénégal",
+    "Nazir Group — locations de vacances et résidences partout au Sénégal",
 };
 
 export default function RootLayout({

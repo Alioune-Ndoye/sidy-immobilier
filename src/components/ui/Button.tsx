@@ -38,12 +38,12 @@ export default function Button({
         transition
         focus:outline-none
         focus-visible:ring-2
-        focus-visible:ring-teal-600
+        focus-visible:ring-primary
         focus-visible:ring-offset-2
         `,
         rounded ? "rounded-full" : "rounded-lg",
         variant === "primary" &&
-          "bg-linear-to-r from-teal-600 to-emerald-600 text-white hover:from-teal-700 hover:to-emerald-700 active:scale-[0.98]",
+          "bg-linear-to-r from-[#044F9C] to-[#2E77D0] text-white hover:from-[#033D7A] hover:to-[#1E5FAE] active:scale-[0.98]",
 
         variant === "outline" &&
           "border border-gray-300 text-gray-800 bg-white hover:bg-gray-100",

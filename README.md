@@ -1,4 +1,4 @@
-# 🏡 Sidy Immobilier – Booking Platform
+# 🏡 Nazir Group – Booking Platform
 
 A modern **full-stack property booking platform** built with **Next.js 16**, **Better Auth**, **Prisma**, and **PostgreSQL**.  
 Users can create listings, book trips, manage reservations, favorite listings, and filter results by category, location, and price.
