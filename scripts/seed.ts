@@ -204,12 +204,17 @@ const listings = [
 ];
 
 async function main() {
-  const host = await prisma.user.findUnique({ where: { email: HOST_EMAIL } });
-  if (!host) {
-    throw new Error(
-      `Hôte ${HOST_EMAIL} introuvable — créez d'abord ce compte via l'application.`,
-    );
-  }
+  // Crée le compte hôte de démonstration s'il n'existe pas encore
+  const host = await prisma.user.upsert({
+    where: { email: HOST_EMAIL },
+    update: {},
+    create: {
+      id: "sidy-demo-host",
+      name: "Sidy Immobilier",
+      email: HOST_EMAIL,
+      emailVerified: true,
+    },
+  });
 
   await prisma.reservation.deleteMany({});
   await prisma.listing.deleteMany({ where: { userId: host.id } });
