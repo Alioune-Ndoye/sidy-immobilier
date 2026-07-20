@@ -1,6 +1,6 @@
 # 🏡 Nazir Group – Booking Platform
 
-A modern **full-stack property booking platform** built with **Next.js 16**, **Better Auth**, **Prisma**, and **PostgreSQL**.  
+A modern **full-stack property booking platform** built with **Next.js 16**, **Better Auth**, **Prisma**, and **MongoDB**.  
 Users can create listings, book trips, manage reservations, favorite listings, and filter results by category, location, and price.
 
 This project is designed to reflect **real-world production patterns** and is ideal for learning or showcasing full-stack development skills.
@@ -36,7 +36,7 @@ This project is designed to reflect **real-world production patterns** and is id
 ### Backend
 - Next.js Server Actions
 - Prisma ORM
-- PostgreSQL
+- MongoDB
 - Better Auth
 - Cloudinary
 

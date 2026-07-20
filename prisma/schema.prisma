@@ -1,8 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// Prisma schema — MongoDB
+// docs: https://pris.ly/d/prisma-schema
 
 generator client {
   provider = "prisma-client"
@@ -10,11 +7,12 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
 model Listing {
-  id            String @id @default(cuid())
+  id            String @id @default(cuid()) @map("_id")
   title         String
   description   String
   imageSrc      String
@@ -29,7 +27,7 @@ model Listing {
   updatedAt DateTime @updatedAt
 
   userId String
-  user User @relation(fields: [userId],references: [id],onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   reservations Reservation[]
 
@@ -40,17 +38,17 @@ model Listing {
 }
 
 model Reservation {
-  id         String   @id @default(cuid())
+  id         String   @id @default(cuid()) @map("_id")
   startDate  DateTime
   endDate    DateTime
   totalPrice Int
   createdAt  DateTime @default(now())
 
   userId String
-   user User @relation(fields: [userId],references: [id],onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   listingId String
-  listing Listing @relation(fields: [listingId],references: [id],onDelete: Cascade)
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 
   @@index([listingId])
   @@index([userId])
@@ -58,7 +56,7 @@ model Reservation {
 }
 
 model User {
-  id            String    @id
+  id            String    @id @map("_id")
   name          String
   email         String
   emailVerified Boolean   @default(false)
@@ -68,16 +66,16 @@ model User {
   sessions      Session[]
   accounts      Account[]
 
-  listings Listing[]
+  listings     Listing[]
   reservations Reservation[]
-  favoriteIds String[] @default([])
+  favoriteIds  String[]      @default([])
 
   @@unique([email])
   @@map("user")
 }
 
 model Session {
-  id        String   @id
+  id        String   @id @map("_id")
   expiresAt DateTime
   token     String
   createdAt DateTime @default(now())
@@ -93,7 +91,7 @@ model Session {
 }
 
 model Account {
-  id                    String    @id
+  id                    String    @id @map("_id")
   accountId             String
   providerId            String
   userId                String
@@ -113,7 +111,7 @@ model Account {
 }
 
 model Verification {
-  id         String   @id
+  id         String   @id @map("_id")
   identifier String
   value      String
   expiresAt  DateTime

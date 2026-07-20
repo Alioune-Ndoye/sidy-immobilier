@@ -1,9 +1,10 @@
 import prisma from "@/lib/prisma";
 import { getCurrentUser } from "@/server-actions/getCurrentUser";
 import {
-  CloudinaryUploadResult,
+  isCloudinaryConfigured,
   uploadToCloudinary,
 } from "@/services/cloudinary";
+import { pickPlaceholder } from "@/constants/PlaceholderImages";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -23,24 +24,24 @@ export async function POST(req: Request) {
     const category = formData.get("category") as string;
     const price = formData.get("price") as string;
     const locationValue = formData.get("locationValue") as string;
-    const image = formData.get("image") as File;
+    const image = formData.get("image") as File | null;
 
-    if (
-      !title ||
-      !description ||
-      !price ||
-      !locationValue ||
-      !category ||
-      !image
-    ) {
+    if (!title || !description || !price || !locationValue || !category) {
       return NextResponse.json(
         { error: "Tous les champs sont obligatoires" },
         { status: 400 },
       );
     }
 
-    //upload the image to cloudinary
-    const imageData: CloudinaryUploadResult = await uploadToCloudinary(image);
+    // Photo optionnelle : vraie photo via Cloudinary si possible,
+    // sinon placeholder embarqué (mode présentation)
+    let imageSrc: string;
+    if (image && image.size > 0 && isCloudinaryConfigured()) {
+      const imageData = await uploadToCloudinary(image);
+      imageSrc = imageData.secure_url;
+    } else {
+      imageSrc = pickPlaceholder(category, title + currentUser.id);
+    }
 
     const listing = await prisma.listing.create({
       data: {
@@ -49,7 +50,7 @@ export async function POST(req: Request) {
         price: Number(price),
         locationValue,
         category,
-        imageSrc: imageData.secure_url,
+        imageSrc,
         userId: currentUser.id,
         roomCount: Number(roomCount),
         guestCount: Number(guestCount),

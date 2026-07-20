@@ -76,14 +76,7 @@ export default function CreateListingModal() {
   };
 
   const createListing = async () => {
-    if (
-      !title ||
-      !description ||
-      !price ||
-      !location?.value ||
-      !category ||
-      !image
-    ) {
+    if (!title || !description || !price || !location?.value || !category) {
       toast("Tous les champs sont obligatoires !", {
         style: {
           background: "#044F9C",
@@ -106,7 +99,7 @@ export default function CreateListingModal() {
       formData.append("roomCount",roomCount.toString());
       formData.append("bathroomCount",bathroomCount.toString());
       formData.append("guestCount",guestCount.toString());
-      formData.append("image",image);
+      if (image) formData.append("image", image);
 
       await axios.post("/api/listings",formData,{
         headers:{
@@ -237,7 +230,12 @@ export default function CreateListingModal() {
         )}
 
         {step === STEPS.IMAGES && (
-          <ImageUpload onChange={handleImageChange} preview={preview} />
+          <div className="w-full space-y-2">
+            <ImageUpload onChange={handleImageChange} preview={preview} />
+            <p className="text-xs text-gray-400 text-center">
+              Optionnel — sans photo, une image de démonstration sera affichée.
+            </p>
+          </div>
         )}
 
         {step === STEPS.PRICE && (

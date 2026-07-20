@@ -10,6 +10,10 @@ import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { formatPrice } from "@/lib/formatPrice";
 import CancelReservationButton from "../reservations/CancelReservationButton";
+import { useEditListingModal } from "@/store/useEditListingModal";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useState } from "react";
 
 interface ListingCardProps {
   listing: Listing;
@@ -43,6 +47,27 @@ export default function ListingCard({
   const router = useRouter();
   const { getByValue } = useCountries();
   const location = getByValue(listing.locationValue);
+  const { open: openEditModal } = useEditListingModal();
+  const [deleting, setDeleting] = useState(false);
+
+  const handleDelete = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!confirm("Supprimer cette annonce ?")) return;
+    try {
+      setDeleting(true);
+      await axios.delete(`/api/listings/${listing.id}`);
+      toast("Annonce supprimée", {
+        style: { background: "#044F9C", color: "white" },
+      });
+      router.refresh();
+    } catch {
+      toast("Une erreur est survenue", {
+        style: { background: "#044F9C", color: "white" },
+      });
+    } finally {
+      setDeleting(false);
+    }
+  };
   return (
     <div
       className="group cursor-pointer"
@@ -89,11 +114,29 @@ export default function ListingCard({
         )}
 
         {property && (
-          <div className="mt-3">
+          <div className="mt-3 space-y-3">
             <p className="text-sm text-gray-500">
               Publiée le{" "}
               {format(new Date(listing.createdAt), "d MMMM yyyy", { locale: fr })}
             </p>
+            <div className="flex gap-2">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  openEditModal(listing);
+                }}
+                className="flex-1 border border-gray-300 rounded-lg py-2 text-sm font-medium cursor-pointer hover:bg-gray-100 transition"
+              >
+                Modifier
+              </button>
+              <button
+                onClick={handleDelete}
+                disabled={deleting}
+                className="flex-1 border border-red-200 text-red-600 rounded-lg py-2 text-sm font-medium cursor-pointer hover:bg-red-50 transition disabled:opacity-50"
+              >
+                {deleting ? "Suppression..." : "Supprimer"}
+              </button>
+            </div>
           </div>
         )}
 

@@ -1,9 +1,7 @@
 import "dotenv/config";
 import { PrismaClient } from "../src/generated/prisma/client";
-import { PrismaPg } from "@prisma/adapter-pg";
 
-const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
-const prisma = new PrismaClient({ adapter });
+const prisma = new PrismaClient();
 
 const HOST_EMAIL = "host@sidy-immobilier.com";
 
@@ -210,7 +208,7 @@ async function main() {
     update: {},
     create: {
       id: "sidy-demo-host",
-      name: "Sidy Immobilier",
+      name: "Nazir Group",
       email: HOST_EMAIL,
       emailVerified: true,
     },

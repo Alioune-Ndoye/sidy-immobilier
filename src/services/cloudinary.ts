@@ -6,6 +6,14 @@ export type CloudinaryUploadResult = {
   public_id: string;
 };
 
+export function isCloudinaryConfigured(): boolean {
+  return Boolean(
+    process.env.CLOUDINARY_CLOUD_NAME &&
+      process.env.CLOUDINARY_API_KEY &&
+      process.env.CLOUDINARY_API_SECRET,
+  );
+}
+
 export async function uploadToCloudinary(
   file: File
 ): Promise<CloudinaryUploadResult> {
