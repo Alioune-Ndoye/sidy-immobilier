@@ -1,7 +1,7 @@
 import ListingCard from "./ListingCard";
 import { getCurrentUser } from "@/server-actions/getCurrentUser";
 import { getListings } from "@/services/listing";
-import { Listing } from "@/generated/prisma/client";
+import { Listing } from "@prisma/client";
 import EmptyListings from "../ui/EmptyListings";
 
 interface HomeProps {
