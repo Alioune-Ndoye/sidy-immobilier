@@ -98,8 +98,14 @@ export async function GET(req: Request) {
     return NextResponse.json(listings);
   } catch (error) {
     console.error("[LISTINGS_GET]", error);
+    const debug = new URL(req.url).searchParams.get("debug") === "1";
     return NextResponse.json(
-      { error: "Failed to fetch listings" },
+      {
+        error: "Failed to fetch listings",
+        ...(debug
+          ? { detail: error instanceof Error ? error.message : String(error) }
+          : {}),
+      },
       { status: 500 },
     );
   }
