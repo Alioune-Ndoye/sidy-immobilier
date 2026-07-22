@@ -6,7 +6,8 @@ const nextConfig: NextConfig = {
   // Inclut le moteur de requête Prisma (généré dans src/generated/prisma)
   // dans le bundle des fonctions serverless Vercel.
   outputFileTracingIncludes: {
-    "/**": ["./src/generated/prisma/**"],
+    "/**": ["./src/generated/prisma/**/*"],
+    "/api/**": ["./src/generated/prisma/**/*"],
   },
 
   images:{
