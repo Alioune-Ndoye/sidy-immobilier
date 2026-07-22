@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCreateListingModal } from "@/store/useCreateListingModal";
 import { useFilterModal } from "@/store/useFilterListingModal";
+import { isAdminEmail } from "@/lib/admin";
 
 export default function Navbar() {
   const { data: session, isPending } = authClient.useSession();
@@ -37,6 +38,8 @@ export default function Navbar() {
     await authClient.signOut();
     router.refresh();
   }
+
+  const isAdmin = isAdminEmail(session?.user?.email);
   return (
     <nav className="fixed top-0 z-50 w-full h-18 lg:h-24 bg-white border-b border-gray-200">
       <div className="flex items-center justify-between h-full mx-auto w-[95%] md:w-[90%]">
@@ -110,6 +113,13 @@ export default function Navbar() {
           {open && (
             <div className="absolute right-0 top-14 w-56 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden px-4 py-2">
               <ul className="text-gray-800 text-sm">
+                {session && !isPending && isAdmin && (
+                  <Link href="/admin">
+                    <li className="px-4 py-3 rounded-lg bg-blue-50 text-primary font-semibold hover:bg-blue-100 cursor-pointer">
+                      Tableau de bord admin
+                    </li>
+                  </Link>
+                )}
                 {session && !isPending && (
                   <>
                    <li onClick={openCreateListing} className="px-4 py-3 hover:bg-gray-100 cursor-pointer">

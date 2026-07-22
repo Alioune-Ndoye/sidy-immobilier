@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
-import { getCurrentUser } from "@/server-actions/getCurrentUser";
+import { getSessionUser } from "@/lib/session";
+import { isAdminEmail } from "@/lib/admin";
 import {
   isCloudinaryConfigured,
   uploadToCloudinary,
@@ -11,10 +12,10 @@ interface Params {
   params: Promise<{ listingId: string }>;
 }
 
-// Modifier une annonce (propriétaire uniquement)
+// Modifier une annonce (propriétaire ou admin)
 export async function PATCH(req: Request, { params }: Params) {
   try {
-    const currentUser = await getCurrentUser();
+    const currentUser = await getSessionUser();
     if (!currentUser?.id) {
       return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
     }
@@ -30,7 +31,7 @@ export async function PATCH(req: Request, { params }: Params) {
         { status: 404 },
       );
     }
-    if (listing.userId !== currentUser.id) {
+    if (listing.userId !== currentUser.id && !isAdminEmail(currentUser.email)) {
       return NextResponse.json(
         { error: "Action non autorisée" },
         { status: 403 },
@@ -91,10 +92,10 @@ export async function PATCH(req: Request, { params }: Params) {
   }
 }
 
-// Supprimer une annonce (propriétaire uniquement)
+// Supprimer une annonce (propriétaire ou admin)
 export async function DELETE(_req: Request, { params }: Params) {
   try {
-    const currentUser = await getCurrentUser();
+    const currentUser = await getSessionUser();
     if (!currentUser?.id) {
       return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
     }
@@ -110,7 +111,7 @@ export async function DELETE(_req: Request, { params }: Params) {
         { status: 404 },
       );
     }
-    if (listing.userId !== currentUser.id) {
+    if (listing.userId !== currentUser.id && !isAdminEmail(currentUser.email)) {
       return NextResponse.json(
         { error: "Action non autorisée" },
         { status: 403 },

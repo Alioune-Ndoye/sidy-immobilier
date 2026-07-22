@@ -115,7 +115,7 @@ export default function CreateListingModal() {
       });  
 
       handleClose();
-      router.replace("/properties");
+      router.refresh();
 
     } catch (error) {
       if(axios.isAxiosError(error)){

@@ -205,7 +205,7 @@ async function main() {
   // Crée le compte hôte de démonstration s'il n'existe pas encore
   const host = await prisma.user.upsert({
     where: { email: HOST_EMAIL },
-    update: {},
+    update: { name: "Nazir Group" },
     create: {
       id: "sidy-demo-host",
       name: "Nazir Group",
@@ -215,7 +215,7 @@ async function main() {
   });
 
   await prisma.reservation.deleteMany({});
-  await prisma.listing.deleteMany({ where: { userId: host.id } });
+  await prisma.listing.deleteMany({});
 
   await prisma.listing.createMany({
     data: listings.map((listing) => ({ ...listing, userId: host.id })),
